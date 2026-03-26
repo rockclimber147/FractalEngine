@@ -1,0 +1,21 @@
+-- Setting up WSL with VSCode
+1. click >< button at bottom left of VSCode
+2. Click Connect to WSL
+3. verify that bottom left says WSL: Ubuntu
+4. File > Open project folder
+
+-- Verify Environment
+Run
+
+sudo apt update
+sudo apt install build-essential gdb cmake
+g++ --version
+
+-- quick graphics test
+Run
+sudo apt install x11-apps
+xeyes
+
+-- install CMake dependencies
+Run
+sudo apt install pkg-config
