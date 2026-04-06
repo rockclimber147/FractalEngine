@@ -1,31 +1,16 @@
 #pragma once
+#include <map>
+#include <string>
 #include <memory>
 #include <vector>
 #include "AmountSliderComponent.hpp"
 
 class App {
-public:
-    enum class ColorChannel {
-            Red,
-            Green,
-            Blue
-        };
-
 private:
-    AmountSliderComponent m_red;
-    AmountSliderComponent m_green;
-    AmountSliderComponent m_blue;
-
-    ColorChannel m_activeChannel = ColorChannel::Red;
+    std::map<std::string, std::unique_ptr<AmountSliderComponent>> m_components;
+    std::string m_activeKey;
 
 public:
-    // Constructor with Initializer List
-    App()
-        : m_red("Red"),
-          m_green("Green"),
-          m_blue("Blue") 
-    {}
-
-    // Main UI Loop
+    App();
     void Run();
 };

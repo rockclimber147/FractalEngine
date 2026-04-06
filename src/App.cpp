@@ -3,39 +3,38 @@
 #include "imgui.h"
 #include "ControlComponent.hpp"
 
+App::App() {
+    m_components["Red"]   = std::make_unique<AmountSliderComponent>("Red");
+    m_components["Green"] = std::make_unique<AmountSliderComponent>("Green");
+    m_components["Blue"]  = std::make_unique<AmountSliderComponent>("Blue");
+
+    m_activeKey = "Red";
+}
+
 void App::Run() {
     // Control Window
     ImGui::Begin("Control Panel");
 
     ImGui::Text("Select Active Slider:");
-    if (ImGui::RadioButton("Red", (int*)&m_activeChannel, (int)ColorChannel::Red)) {} 
-    ImGui::SameLine();
-    if (ImGui::RadioButton("Green", (int*)&m_activeChannel, (int)ColorChannel::Green)) {} 
-    ImGui::SameLine();
-    if (ImGui::RadioButton("Blue", (int*)&m_activeChannel, (int)ColorChannel::Blue)) {}
+    for (auto const& [name, component] : m_components) {
+        if (ImGui::Selectable(name.c_str(), m_activeKey == name)) {
+            m_activeKey = name;
+        }
+    }
 
     ImGui::Separator();
     
-    switch (m_activeChannel) {
-        case ColorChannel::Red:
-            m_red.DrawControlPanel();
-            break;
-        case ColorChannel::Green:
-            m_green.DrawControlPanel();
-            break;
-        case ColorChannel::Blue:
-            m_blue.DrawControlPanel();
-            break;
+    if (m_components.count(m_activeKey)) {
+        m_components[m_activeKey]->DrawControlPanel();
     }
     
     // Capture the current state of our components
     ImVec4 mixColor = ImVec4(
-        m_red.GetAmount(), 
-        m_green.GetAmount(), 
-        m_blue.GetAmount(), 
+        m_components["Red"]->GetAmount(),
+        m_components["Green"]->GetAmount(),
+        m_components["Blue"]->GetAmount(),
         1.0f
     );
-    
     ImGui::End();
 
     // Visualization Window
