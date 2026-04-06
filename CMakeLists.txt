@@ -20,6 +20,7 @@ set(IMGUI_BACKEND_DIR "${IMGUI_DIR}/backends")
 # We include your logic AND the ImGui implementation files
 set(SOURCES
     src/main.cpp
+    src/App.cpp
     
     # Dear ImGui Core
     ${IMGUI_DIR}/imgui.cpp
