@@ -42,4 +42,16 @@ void App::Run() {
     // We use ColorButton as a quick way to show our mixed RGB result
     ImGui::ColorButton("Result", mixColor, ImGuiColorEditFlags_NoPicker, ImVec2(200, 200));
     ImGui::End();
+
+    ImGui::Begin("Pixel Panel");
+    if (m_components.count(m_activeKey)) {
+        ImTextureID tex = m_components[m_activeKey]->GetResultTexture();
+        
+        // Make the image fill the available window space
+        ImVec2 viewportSize = ImGui::GetContentRegionAvail();
+        
+        // Draw the texture
+        ImGui::Image(tex, viewportSize);
+    }
+    ImGui::End();
 }
