@@ -21,4 +21,5 @@ public:
     }
 
     float GetAmount() const { return m_amount; }
+    std::string GetLabel() const override { return m_label; }
 };

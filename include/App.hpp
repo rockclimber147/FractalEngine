@@ -6,9 +6,12 @@
 #include "AmountSliderComponent.hpp"
 
 class App {
+public:
+    enum class Channel { Red, Green, Blue };
+
 private:
-    std::map<std::string, std::unique_ptr<AmountSliderComponent>> m_components;
-    std::string m_activeKey;
+    std::map<Channel, std::unique_ptr<AmountSliderComponent>> m_components;
+    Channel m_activeKey;
 
 public:
     App();

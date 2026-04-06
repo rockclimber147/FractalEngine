@@ -4,11 +4,11 @@
 #include "ControlComponent.hpp"
 
 App::App() {
-    m_components["Red"]   = std::make_unique<AmountSliderComponent>("Red");
-    m_components["Green"] = std::make_unique<AmountSliderComponent>("Green");
-    m_components["Blue"]  = std::make_unique<AmountSliderComponent>("Blue");
+    m_components[Channel::Red]   = std::make_unique<AmountSliderComponent>("Red");
+    m_components[Channel::Green] = std::make_unique<AmountSliderComponent>("Green");
+    m_components[Channel::Blue]  = std::make_unique<AmountSliderComponent>("Blue");
 
-    m_activeKey = "Red";
+    m_activeKey = Channel::Red;
 }
 
 void App::Run() {
@@ -17,7 +17,7 @@ void App::Run() {
 
     ImGui::Text("Select Active Slider:");
     for (auto const& [name, component] : m_components) {
-        if (ImGui::Selectable(name.c_str(), m_activeKey == name)) {
+        if (ImGui::Selectable(component->GetLabel().c_str(), m_activeKey == name)) {
             m_activeKey = name;
         }
     }
@@ -30,9 +30,9 @@ void App::Run() {
     
     // Capture the current state of our components
     ImVec4 mixColor = ImVec4(
-        m_components["Red"]->GetAmount(),
-        m_components["Green"]->GetAmount(),
-        m_components["Blue"]->GetAmount(),
+        m_components[Channel::Red]->GetAmount(),
+        m_components[Channel::Green]->GetAmount(),
+        m_components[Channel::Blue]->GetAmount(),
         1.0f
     );
     ImGui::End();
