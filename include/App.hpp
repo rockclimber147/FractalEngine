@@ -1,14 +1,22 @@
 #pragma once
 #include <memory>
 #include <vector>
-
-class Mandelbrot;
+#include "AmountSliderComponent.hpp"
 
 class App {
-public:
-    App();
-    void Run(); // The main loop
-
 private:
-    float m_brightness = 1.0f;
+    AmountSliderComponent m_red;
+    AmountSliderComponent m_green;
+    AmountSliderComponent m_blue;
+
+public:
+    // Constructor with Initializer List
+    App()
+        : m_red("Red"),
+          m_green("Green"),
+          m_blue("Blue") 
+    {}
+
+    // Main UI Loop
+    void Run();
 };
