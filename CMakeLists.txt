@@ -21,6 +21,8 @@ set(IMGUI_BACKEND_DIR "${IMGUI_DIR}/backends")
 set(SOURCES
     src/main.cpp
     src/App.cpp
+    src/FractalComponent.cpp
+    src/fractals/Checkerboard.cpp
     
     # Dear ImGui Core
     ${IMGUI_DIR}/imgui.cpp

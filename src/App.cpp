@@ -1,14 +1,14 @@
 #include <string>
 #include "App.hpp"
 #include "imgui.h"
-#include "ControlComponent.hpp"
+#include "Component.hpp"
+#include "fractals/CheckerboardComponent.hpp"
 
 App::App() {
-    m_components[Channel::Red]   = std::make_unique<AmountSliderComponent>("Red");
-    m_components[Channel::Green] = std::make_unique<AmountSliderComponent>("Green");
-    m_components[Channel::Blue]  = std::make_unique<AmountSliderComponent>("Blue");
-
-    m_activeKey = Channel::Red;
+    m_components["Checkerboard"] = std::make_unique<CheckerboardComponent>("Checkerboard");
+    
+    // Set the default active component
+    m_activeKey = "Checkerboard";
 }
 
 void App::Run() {
@@ -28,29 +28,27 @@ void App::Run() {
         m_components[m_activeKey]->DrawControlPanel();
     }
     
-    // Capture the current state of our components
-    ImVec4 mixColor = ImVec4(
-        m_components[Channel::Red]->GetAmount(),
-        m_components[Channel::Green]->GetAmount(),
-        m_components[Channel::Blue]->GetAmount(),
-        1.0f
-    );
-    ImGui::End();
-
-    // Visualization Window
-    ImGui::Begin("Image Panel");
-    // We use ColorButton as a quick way to show our mixed RGB result
-    ImGui::ColorButton("Result", mixColor, ImGuiColorEditFlags_NoPicker, ImVec2(200, 200));
     ImGui::End();
 
     ImGui::Begin("Pixel Panel");
     if (m_components.count(m_activeKey)) {
-        ImTextureID tex = m_components[m_activeKey]->GetResultTexture();
+        auto& comp = m_components[m_activeKey];
         
-        // Make the image fill the available window space
         ImVec2 viewportSize = ImGui::GetContentRegionAvail();
         
-        // Draw the texture
+        comp->Resize((int)viewportSize.x, (int)viewportSize.y);
+
+        if (ImGui::IsWindowHovered() && ImGui::IsMouseDragging(ImGuiMouseButton_Right)) {
+            ImVec2 delta = ImGui::GetIO().MouseDelta;
+            comp->Pan(delta.x, delta.y, viewportSize.x, viewportSize.y);
+        }
+
+        if (ImGui::IsWindowHovered() && ImGui::GetIO().MouseWheel != 0) {
+            comp->Zoom(ImGui::GetIO().MouseWheel);
+        }
+
+        // 5. Render the result
+        ImTextureID tex = comp->GetResultTexture();
         ImGui::Image(tex, viewportSize);
     }
     ImGui::End();
