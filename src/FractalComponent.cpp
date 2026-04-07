@@ -70,6 +70,7 @@ void FractalComponent::Zoom(float amount, float mouseX, float mouseY, float vW, 
  */
 void FractalComponent::Resize(int w, int h) {
     if (w == m_width && h == m_height) return;
+    if (w <= 0 || h <= 0) return;
     m_width = w;
     m_height = h;
     m_pixelBuffer.assign(m_width * m_height * 3, 0);
