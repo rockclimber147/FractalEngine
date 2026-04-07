@@ -23,6 +23,7 @@ set(SOURCES
     src/App.cpp
     src/FractalComponent.cpp
     src/fractals/Checkerboard.cpp
+    src/fractals/Mandelbrot.cpp
     
     # Dear ImGui Core
     ${IMGUI_DIR}/imgui.cpp

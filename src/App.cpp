@@ -3,9 +3,11 @@
 #include "imgui.h"
 #include "Component.hpp"
 #include "fractals/CheckerboardComponent.hpp"
+#include "fractals/MandelbrotComponent.hpp"
 
 App::App() {
     m_components["Checkerboard"] = std::make_unique<CheckerboardComponent>("Checkerboard");
+    m_components["Mandelbrot"] = std::make_unique<MandelbrotComponent>("Mandelbrot");
     
     // Set the default active component
     m_activeKey = "Checkerboard";
