@@ -10,6 +10,6 @@ public:
 
     virtual ImTextureID GetResultTexture() const = 0;
     virtual void Pan(float dx, float dy, float vW, float vH) = 0;
-    virtual void Zoom(float amount) = 0;
+    virtual void Zoom(float amount, float mouseX, float mouseY, float vW, float vH) = 0;
     virtual void Resize(int w, int h) = 0;
 };

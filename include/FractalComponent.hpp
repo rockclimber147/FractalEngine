@@ -26,7 +26,7 @@ public:
 
     // Shared Viewport Implementations
     void Pan(float dx, float dy, float vW, float vH) override;
-    void Zoom(float amount) override;
+    void Zoom(float amount, float mouseX, float mouseY, float vW, float vH) override;
     void Resize(int w, int h) override;
 
     // ImGui Interface Implementations
