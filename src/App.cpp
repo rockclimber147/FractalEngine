@@ -44,7 +44,14 @@ void App::Run() {
         }
 
         if (ImGui::IsWindowHovered() && ImGui::GetIO().MouseWheel != 0) {
-            comp->Zoom(ImGui::GetIO().MouseWheel);
+            ImVec2 mousePos = ImGui::GetMousePos();
+            ImVec2 windowPos = ImGui::GetWindowPos();
+            ImVec2 cursorPadding = ImGui::GetCursorPos();
+
+            float relativeX = mousePos.x - windowPos.x - cursorPadding.x;
+            float relativeY = mousePos.y - windowPos.y - cursorPadding.y;
+
+            comp->Zoom(ImGui::GetIO().MouseWheel, relativeX, relativeY, viewportSize.x, viewportSize.y);
         }
 
         // 5. Render the result
