@@ -17,6 +17,9 @@ const char* GPUMandelbrot::GetFragmentShaderSource() {
         uniform vec2 u_offset;
         uniform float u_zoom;
         uniform vec2 u_resolution;
+        uniform int u_maxIterations;
+        uniform float u_colorFrequency;
+        uniform float u_colorOffset;
 
         void main() {
             float ppu = 200.0 * u_zoom;
@@ -26,33 +29,49 @@ const char* GPUMandelbrot::GetFragmentShaderSource() {
             vec2 c = vec2(u, v);
             vec2 z = vec2(0.0);
             int iter = 0;
-            while(dot(z, z) <= 4.0 && iter < 500) {
+            while(dot(z, z) <= 4.0 && iter < u_maxIterations) {
                 z = vec2(z.x*z.x - z.y*z.y, 2.0*z.x*z.y) + c;
                 iter++;
             }
-            FragColor = (iter == 500) ? vec4(0,0,0,1) : vec4(vec3(float(iter)/500.0), 1.0);
+
+            if (iter == u_maxIterations) {
+                FragColor = vec4(0.0, 0.0, 0.0, 1.0);
+            } else {
+                float t = float(iter) * (u_colorFrequency / 100.0);
+                vec3 col = 0.5 + 0.5 * cos(3.0 + t + vec3(u_colorOffset, 2 + u_colorOffset, 4 + u_colorOffset));
+                FragColor = vec4(col, 1.0);
+            }
         }
     )";
 }
 
 void GPUMandelbrot::UploadExtraUniforms() {
-    // TODO
+    GLint maxIterLoc = glGetUniformLocation(m_shaderProgram, "u_maxIterations");
+    GLint colorFreqLoc = glGetUniformLocation(m_shaderProgram, "u_colorFrequency");
+    GLint colorOffsetLoc = glGetUniformLocation(m_shaderProgram, "u_colorOffset");
+
+    glUniform1i(maxIterLoc, m_maxIterations);
+    glUniform1f(colorFreqLoc, m_colorFrequency);
+    glUniform1f(colorOffsetLoc, m_colorOffset);
 }
 
 void GPUMandelbrot::DrawControlPanel() {
     ImGui::Text("Mandelbrot");
-    
-    // Increased max iterations for better detailed edges
-    if (ImGui::SliderInt("Detail (Iterations)", &m_maxIterations, 50, 2000)) {
-        UpdateTexture();
+    bool changed = false;
+
+    if (ImGui::SliderInt("Detail (Iterations)", &m_maxIterations, 1, 2000)) {
+        changed = true;
     }
 
-    // New Slider: Controls color density/cycling speed
     if (ImGui::SliderFloat("Color Cycle Speed", &m_colorFrequency, 1.0f, 100.0f)) {
-        UpdateTexture();
+        changed = true;
     }
 
     if (ImGui::SliderFloat("Color Offset", &m_colorOffset, 0.0f, 6.0f)) {
+        changed = true;
+    }
+
+    if (changed) {
         UpdateTexture();
     }
 
