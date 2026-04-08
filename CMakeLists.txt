@@ -29,6 +29,7 @@ set(SOURCES
     src/fractals/Checkerboard/Checkerboard.cpp
     src/fractals/Mandelbrot/Mandelbrot.cpp
     src/fractals/Mandelbrot/GPUMandelbrot.cpp
+    src/fractals/Julia/GPUJulia.cpp
     
     # Dear ImGui Core
     ${IMGUI_DIR}/imgui.cpp

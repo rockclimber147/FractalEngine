@@ -6,13 +6,13 @@
 #include "fractals/Checkerboard/Checkerboard.hpp"
 #include "fractals/Mandelbrot/Mandelbrot.hpp"
 #include "fractals/Mandelbrot/GPUMandelbrot.hpp"
+#include "fractals/Julia/GPUJulia.hpp"
 
 App::App() {
     m_components["Checkerboard"] = std::make_unique<Checkerboard>("Checkerboard");
-    m_components["Mandelbrot"] = std::make_unique<Mandelbrot>("Mandelbrot");
-    m_components["Mandelbrot_GPU"] = std::make_unique<GPUMandelbrot>("GPUMandelbrot");
-    
-    m_activeKey = "Mandelbrot";
+    m_components["Mandelbrot"] = std::make_unique<GPUMandelbrot>("Mandelbrot");
+    m_components["Julia"] = std::make_unique<GPUJulia>("Julia");
+    m_activeKey = "Julia";
 }
 
 void App::Run() {
