@@ -30,5 +30,8 @@ public:
     void Resize(int w, int h) override;
 
     ImTextureID GetResultTexture() const override;
-    virtual void UpdateTexture() = 0;
+    void UpdateTexture();
+    virtual void GetPixelColor(double u, double v, unsigned char rgb[3]) = 0;
+    virtual double GetPixelsPerUnit() const { return 100.0 * m_zoom; }
+
 };
