@@ -1,7 +1,7 @@
 #pragma once
-#include "../FractalComponent.hpp"
+#include "fractals/CPUFractalComponent.hpp"
 
-class Mandelbrot : public FractalComponent {
+class Mandelbrot : public CPUFractalComponent {
 private:
     std::string m_name;
     int m_maxIterations = 100;

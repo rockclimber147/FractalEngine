@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 set(OpenGL_GL_PREFERENCE GLVND)
 project(FractalRenderer)
 
-# 1. Use C++17 or 20 (Needed for modern C++ features)
+# 1. Use C++17 or 20
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -10,6 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # This looks for the GLFW and OpenGL headers/libraries you installed via apt
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GLFW REQUIRED glfw3)
+find_package(GLEW REQUIRED)
 find_package(OpenGL REQUIRED)
 
 # 3. Define where the ImGui files live
@@ -23,8 +24,11 @@ set(SOURCES
     src/main.cpp
     src/App.cpp
     src/fractals/FractalComponent.cpp
+    src/fractals/GPUFractalComponent.cpp
+    src/fractals/CPUFractalComponent.cpp
     src/fractals/Checkerboard/Checkerboard.cpp
     src/fractals/Mandelbrot/Mandelbrot.cpp
+    src/fractals/Mandelbrot/GPUMandelbrot.cpp
     
     # Dear ImGui Core
     ${IMGUI_DIR}/imgui.cpp
@@ -47,11 +51,13 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${IMGUI_DIR}
     ${IMGUI_BACKEND_DIR}
     ${GLFW_INCLUDE_DIRS}
+    ${GLEW_INCLUDE_DIRS}
 )
 
 # 7. Link the actual library binaries
 target_link_libraries(${PROJECT_NAME} 
-    ${GLFW_LIBRARIES} 
+    ${GLFW_LIBRARIES}
+    ${GLEW_LIBRARIES} 
     OpenGL::GL 
     dl # Required for Linux/WSL graphics
 )

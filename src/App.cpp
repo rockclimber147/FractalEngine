@@ -1,13 +1,16 @@
+#include <GL/glew.h>
 #include <string>
 #include "App.hpp"
 #include "imgui.h"
 #include "Component.hpp"
 #include "fractals/Checkerboard/Checkerboard.hpp"
 #include "fractals/Mandelbrot/Mandelbrot.hpp"
+#include "fractals/Mandelbrot/GPUMandelbrot.hpp"
 
 App::App() {
     m_components["Checkerboard"] = std::make_unique<Checkerboard>("Checkerboard");
     m_components["Mandelbrot"] = std::make_unique<Mandelbrot>("Mandelbrot");
+    m_components["Mandelbrot_GPU"] = std::make_unique<GPUMandelbrot>("GPUMandelbrot");
     
     m_activeKey = "Mandelbrot";
 }

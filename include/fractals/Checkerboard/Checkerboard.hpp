@@ -1,7 +1,7 @@
 #pragma once
-#include "../FractalComponent.hpp"
+#include "fractals/CPUFractalComponent.hpp"
 
-class Checkerboard : public FractalComponent {
+class Checkerboard : public CPUFractalComponent {
 private:
     std::string m_name;
     float m_brightness = 1.0f;
