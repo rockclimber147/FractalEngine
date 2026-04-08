@@ -21,9 +21,11 @@ FractalComponent::~FractalComponent() {
  * @param vH Current height of the viewport in pixels.
  */
 void FractalComponent::Pan(float dx, float dy, float vW, float vH) {
-    double aspect = (double)vW / vH;
-    m_offsetX -= (dx / vW) * (4.0 / m_zoom) * aspect;
-    m_offsetY -= (dy / vH) * (4.0 / m_zoom);
+    double ppu = GetPixelsPerUnit();
+
+    m_offsetX -= (double)dx / ppu;
+    m_offsetY -= (double)dy / ppu;
+
     UpdateTexture();
 }
 
@@ -40,23 +42,24 @@ void FractalComponent::Pan(float dx, float dy, float vW, float vH) {
 void FractalComponent::Zoom(float amount, float mouseX, float mouseY, float vW, float vH) {
     if (amount == 0) return;
 
-    double aspect = (double)vW / vH;
-
-    // 1. Determine the world-space coordinate under the mouse before zooming
-    double beforeX = m_offsetX + ((mouseX / (double)vW) - 0.5) * (4.0 / m_zoom) * aspect;
-    double beforeY = m_offsetY + ((mouseY / (double)vH) - 0.5) * (4.0 / m_zoom);
+    // 1. World-space point under mouse BEFORE zoom
+    // Note: We use the same (mouseX - halfW) / ppu logic from UpdateTexture
+    double ppuBefore = GetPixelsPerUnit();
+    double mouseWorldX = m_offsetX + (mouseX - vW * 0.5) / ppuBefore;
+    double mouseWorldY = m_offsetY + (mouseY - vH * 0.5) / ppuBefore;
 
     // 2. Apply the zoom factor
     double multiplier = (amount > 0) ? 1.1 : (1.0 / 1.1);
     m_zoom *= multiplier;
 
-    // 3. Determine where that same world-space point is after zooming
-    double afterX = m_offsetX + ((mouseX / (double)vW) - 0.5) * (4.0 / m_zoom) * aspect;
-    double afterY = m_offsetY + ((mouseY / (double)vH) - 0.5) * (4.0 / m_zoom);
+    // 3. Determine world-space point under mouse AFTER zoom
+    double ppuAfter = GetPixelsPerUnit();
+    double mouseWorldXAfter = m_offsetX + (mouseX - vW * 0.5) / ppuAfter;
+    double mouseWorldYAfter = m_offsetY + (mouseY - vH * 0.5) / ppuAfter;
 
-    // 4. Adjust the offset by the difference to "pin" the point under the mouse
-    m_offsetX += (beforeX - afterX);
-    m_offsetY += (beforeY - afterY);
+    // 4. Adjust the offset to "pin" the point
+    m_offsetX += (mouseWorldX - mouseWorldXAfter);
+    m_offsetY += (mouseWorldY - mouseWorldYAfter);
 
     UpdateTexture();
 }
