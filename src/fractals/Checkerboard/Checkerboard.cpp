@@ -1,5 +1,5 @@
 #include <cmath>
-#include "fractals/Checkerboard.hpp"
+#include "fractals/Checkerboard/Checkerboard.hpp"
 
 Checkerboard::Checkerboard(std::string name) 
     : m_name(std::move(name)), m_imguiID("##" + m_name) 

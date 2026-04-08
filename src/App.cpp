@@ -2,8 +2,8 @@
 #include "App.hpp"
 #include "imgui.h"
 #include "Component.hpp"
-#include "fractals/Checkerboard.hpp"
-#include "fractals/Mandelbrot.hpp"
+#include "fractals/Checkerboard/Checkerboard.hpp"
+#include "fractals/Mandelbrot/Mandelbrot.hpp"
 
 App::App() {
     m_components["Checkerboard"] = std::make_unique<Checkerboard>("Checkerboard");

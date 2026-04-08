@@ -1,4 +1,4 @@
-#include "fractals/Mandelbrot.hpp"
+#include "fractals/Mandelbrot/Mandelbrot.hpp"
 #include <complex>
 #include <cmath>
 #include <iostream>

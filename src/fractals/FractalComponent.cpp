@@ -1,4 +1,4 @@
-#include "FractalComponent.hpp"
+#include "fractals/FractalComponent.hpp"
 
 FractalComponent::FractalComponent() {
     InitTexture();
