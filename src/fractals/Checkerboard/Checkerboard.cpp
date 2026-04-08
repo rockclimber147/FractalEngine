@@ -26,25 +26,11 @@ void Checkerboard::DrawControlPanel() {
     ImGui::Text("m_height and width: %d %d", m_height, m_width);
 }
 
-void Checkerboard::UpdateTexture() {
-    if (m_pixelBuffer.empty()) return;
-
-    double pixelsPerUnit = 100.0 * m_zoom;
-
-    for (int y = 0; y < m_height; y++) {
-        for (int x = 0; x < m_width; x++) {
-            double u = m_offsetX + (x - m_width * 0.5) / pixelsPerUnit;
-            double v = m_offsetY + (y - m_height * 0.5) / pixelsPerUnit;
-
-            int checkX = static_cast<int>(std::floor(u));
-            int checkY = static_cast<int>(std::floor(v));
-            bool isVisible = (std::abs(checkX + checkY) % 2 == 0);
-            
-            int idx = (y * m_width + x) * 3;
-            unsigned char color = isVisible ? (unsigned char)(m_brightness * 255) : 0;
-            
-            m_pixelBuffer[idx] = m_pixelBuffer[idx+1] = m_pixelBuffer[idx+2] = color;
-        }
-    }
-    UploadTexture();
+void Checkerboard::GetPixelColor(double u, double v, unsigned char rgb[3]) {
+    int checkX = static_cast<int>(std::floor(u));
+    int checkY = static_cast<int>(std::floor(v));
+    bool isVisible = (std::abs(checkX + checkY) % 2 == 0);
+    
+    unsigned char color = isVisible ? (unsigned char)(m_brightness * 255) : 0;
+    rgb[0] = rgb[1] = rgb[2] = color;
 }

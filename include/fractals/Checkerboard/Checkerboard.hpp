@@ -14,6 +14,5 @@ public:
     void DrawControlPanel() override;
     std::string GetLabel() const override;
 
-    // FractalComponent Implementation
-    void UpdateTexture() override;
+    void GetPixelColor(double u, double v, unsigned char rgb[3]) override;
 };
