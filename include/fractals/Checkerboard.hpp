@@ -1,14 +1,14 @@
 #pragma once
 #include "../FractalComponent.hpp"
 
-class CheckerboardComponent : public FractalComponent {
+class Checkerboard : public FractalComponent {
 private:
     std::string m_name;
     float m_brightness = 1.0f;
     std::string m_imguiID;
 
 public:
-    CheckerboardComponent(std::string name);
+    Checkerboard(std::string name);
 
     // ControlComponent Implementations
     void DrawControlPanel() override;

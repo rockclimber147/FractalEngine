@@ -1,18 +1,18 @@
-#include "fractals/CheckerboardComponent.hpp"
 #include <cmath>
+#include "fractals/Checkerboard.hpp"
 
-CheckerboardComponent::CheckerboardComponent(std::string name) 
+Checkerboard::Checkerboard(std::string name) 
     : m_name(std::move(name)), m_imguiID("##" + m_name) 
 {
     // FractalComponent constructor handles glGenTextures
     UpdateTexture();
 }
 
-std::string CheckerboardComponent::GetLabel() const {
+std::string Checkerboard::GetLabel() const {
     return m_name;
 }
 
-void CheckerboardComponent::DrawControlPanel() {
+void Checkerboard::DrawControlPanel() {
     ImGui::Text("Checkerboard Configuration");
     
     if (ImGui::SliderFloat("Brightness", &m_brightness, 0.0f, 1.0f)) {
@@ -26,7 +26,7 @@ void CheckerboardComponent::DrawControlPanel() {
     ImGui::Text("m_height and width: %d %d", m_height, m_width);
 }
 
-void CheckerboardComponent::UpdateTexture() {
+void Checkerboard::UpdateTexture() {
     if (m_pixelBuffer.empty()) return;
 
     double pixelsPerUnit = 100.0 * m_zoom;

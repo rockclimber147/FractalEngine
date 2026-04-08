@@ -29,9 +29,6 @@ public:
     void Zoom(float amount, float mouseX, float mouseY, float vW, float vH) override;
     void Resize(int w, int h) override;
 
-    // ImGui Interface Implementations
     ImTextureID GetResultTexture() const override;
-    
-    // The "Hook": Subclasses must implement the actual pixel loop
     virtual void UpdateTexture() = 0;
 };

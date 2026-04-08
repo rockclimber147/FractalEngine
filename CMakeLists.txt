@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
+set(OpenGL_GL_PREFERENCE GLVND)
 project(FractalRenderer)
 
 # 1. Use C++17 or 20 (Needed for modern C++ features)

@@ -2,15 +2,14 @@
 #include "App.hpp"
 #include "imgui.h"
 #include "Component.hpp"
-#include "fractals/CheckerboardComponent.hpp"
-#include "fractals/MandelbrotComponent.hpp"
+#include "fractals/Checkerboard.hpp"
+#include "fractals/Mandelbrot.hpp"
 
 App::App() {
-    m_components["Checkerboard"] = std::make_unique<CheckerboardComponent>("Checkerboard");
-    m_components["Mandelbrot"] = std::make_unique<MandelbrotComponent>("Mandelbrot");
+    m_components["Checkerboard"] = std::make_unique<Checkerboard>("Checkerboard");
+    m_components["Mandelbrot"] = std::make_unique<Mandelbrot>("Mandelbrot");
     
-    // Set the default active component
-    m_activeKey = "Checkerboard";
+    m_activeKey = "Mandelbrot";
 }
 
 void App::Run() {
@@ -32,7 +31,7 @@ void App::Run() {
     
     ImGui::End();
 
-    ImGui::Begin("Pixel Panel");
+    ImGui::Begin("Fractal");
     if (m_components.count(m_activeKey)) {
         auto& comp = m_components[m_activeKey];
         

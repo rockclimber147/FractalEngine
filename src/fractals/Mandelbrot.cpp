@@ -1,9 +1,9 @@
-#include "fractals/MandelbrotComponent.hpp"
+#include "fractals/Mandelbrot.hpp"
 #include <complex>
 #include <cmath>
 #include <iostream>
 
-MandelbrotComponent::MandelbrotComponent(std::string name) 
+Mandelbrot::Mandelbrot(std::string name) 
     : m_name(std::move(name)) 
 {
     // Start zoomed out to see the whole set
@@ -11,9 +11,9 @@ MandelbrotComponent::MandelbrotComponent(std::string name)
     UpdateTexture();
 }
 
-std::string MandelbrotComponent::GetLabel() const { return m_name; }
+std::string Mandelbrot::GetLabel() const { return m_name; }
 
-void MandelbrotComponent::DrawControlPanel() {
+void Mandelbrot::DrawControlPanel() {
     ImGui::Text("Mandelbrot");
     
     // Increased max iterations for better detailed edges
@@ -36,7 +36,7 @@ void MandelbrotComponent::DrawControlPanel() {
     ImGui::Text("Zoom: %.4f", m_zoom);
 }
 
-void MandelbrotComponent::UpdateTexture() {
+void Mandelbrot::UpdateTexture() {
     if (m_pixelBuffer.empty() || m_width <= 0 || m_height <= 0) return;
 
     double pixelsPerUnit = 200.0 * m_zoom;
@@ -99,7 +99,7 @@ void MandelbrotComponent::UpdateTexture() {
     UploadTexture();
 }
 
-void MandelbrotComponent::MapColor(double escapeVal, unsigned char* rgbOut) {
+void Mandelbrot::MapColor(double escapeVal, unsigned char* rgbOut) {
     double scale = m_colorFrequency / 100.0;
     
     double r = std::sin(scale * escapeVal + 0.0 + m_colorOffset) * 0.5 + 0.5; // (0 to 1 range)
