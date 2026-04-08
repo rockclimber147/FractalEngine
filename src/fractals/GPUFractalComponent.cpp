@@ -65,12 +65,10 @@ void GPUFractalComponent::UpdateTexture() {
     glViewport(0, 0, m_width, m_height);
     glUseProgram(m_shaderProgram);
 
-    // Standard Uniforms
-    glUniform2f(glGetUniformLocation(m_shaderProgram, "u_offset"), (float)m_offsetX, (float)m_offsetY);
-    glUniform1f(glGetUniformLocation(m_shaderProgram, "u_zoom"), (float)m_zoom);
+    glUniform2d(glGetUniformLocation(m_shaderProgram, "u_offset"), m_offsetX, m_offsetY);
+    glUniform1d(glGetUniformLocation(m_shaderProgram, "u_zoom"), m_zoom);
     glUniform2f(glGetUniformLocation(m_shaderProgram, "u_resolution"), (float)m_width, (float)m_height);
 
-    // Subclass Uniforms (e.g., iterations)
     UploadExtraUniforms();
 
     glBindVertexArray(m_vao);
