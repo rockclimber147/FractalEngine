@@ -2,7 +2,7 @@
 
 GPULyapunov::GPULyapunov(std::string name) : m_name(std::move(name))
 {
-
+    UpdateTexture();
 }
 
 std::string GPULyapunov::GetLabel() const { return m_name; }
