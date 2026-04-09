@@ -3,15 +3,15 @@
 #include "App.hpp"
 #include "imgui.h"
 #include "Component.hpp"
-#include "fractals/Checkerboard/Checkerboard.hpp"
 #include "fractals/Mandelbrot/Mandelbrot.hpp"
 #include "fractals/Mandelbrot/GPUMandelbrot.hpp"
 #include "fractals/Julia/GPUJulia.hpp"
+#include "fractals/Lyapunov/GPULyapunov.hpp"
 
 App::App() {
-    m_components["Checkerboard"] = std::make_unique<Checkerboard>("Checkerboard");
     m_components["Mandelbrot"] = std::make_unique<GPUMandelbrot>("Mandelbrot");
     m_components["Julia"] = std::make_unique<GPUJulia>("Julia");
+    m_components["Lyapunov"] = std::make_unique<GPULyapunov>("Lyapunov");
     m_activeKey = "Julia";
 }
 
@@ -58,7 +58,6 @@ void App::Run() {
             comp->Zoom(ImGui::GetIO().MouseWheel, relativeX, relativeY, viewportSize.x, viewportSize.y);
         }
 
-        // 5. Render the result
         ImTextureID tex = comp->GetResultTexture();
         ImGui::Image(tex, viewportSize);
     }

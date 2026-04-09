@@ -26,10 +26,10 @@ set(SOURCES
     src/fractals/FractalComponent.cpp
     src/fractals/GPUFractalComponent.cpp
     src/fractals/CPUFractalComponent.cpp
-    src/fractals/Checkerboard/Checkerboard.cpp
     src/fractals/Mandelbrot/Mandelbrot.cpp
     src/fractals/Mandelbrot/GPUMandelbrot.cpp
     src/fractals/Julia/GPUJulia.cpp
+    src/fractals/Lyapunov/GPULyapunov.cpp
     
     # Dear ImGui Core
     ${IMGUI_DIR}/imgui.cpp
