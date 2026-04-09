@@ -17,4 +17,7 @@ private:
 public:
     App();
     void Run();
+    
+    template<typename T>
+    void RegisterFractal(const std::string& name);
 };

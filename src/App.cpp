@@ -9,11 +9,17 @@
 #include "fractals/GPUNewton.hpp"
 
 App::App() {
-    m_components["Mandelbrot"] = std::make_unique<GPUMandelbrot>("Mandelbrot");
-    m_components["Julia"] = std::make_unique<GPUJulia>("Julia");
-    m_components["Lyapunov"] = std::make_unique<GPULyapunov>("Lyapunov");
-    m_components["Newton"] = std::make_unique<GPUNewton>("Newton");
+    RegisterFractal<GPUMandelbrot>("Mandelbrot");
+    RegisterFractal<GPUJulia>("Julia");
+    RegisterFractal<GPULyapunov>("Lyapunov");
+    RegisterFractal<GPUNewton>("Newton");
+    
     m_activeKey = "Mandelbrot";
+}
+
+template <typename T>
+void App::RegisterFractal(const std::string& name) {
+    m_components[name] = std::make_unique<T>(name);
 }
 
 void App::Run() {
