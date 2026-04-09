@@ -1,7 +1,7 @@
 #include "fractals/Julia/GPUJulia.hpp"
 
 GPUJulia::GPUJulia(std::string name) 
-    : m_name(std::move(name)) 
+    : GPUFractalComponent(std::move(name))
 {
     juliaCReal = -0.7f; 
     juliaCImag = 0.27f;
@@ -17,8 +17,6 @@ GPUJulia::GPUJulia(std::string name)
     };
     UpdateTexture();
 }
-
-std::string GPUJulia::GetLabel() const { return m_name; }
 
 const char* GPUJulia::GetFragmentShaderSource() {
     return R"(

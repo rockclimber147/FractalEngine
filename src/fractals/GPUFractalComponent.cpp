@@ -1,6 +1,7 @@
 #include "fractals/GPUFractalComponent.hpp"
 
-GPUFractalComponent::GPUFractalComponent() : FractalComponent() {}
+GPUFractalComponent::GPUFractalComponent(std::string name) 
+    : FractalComponent(std::move(name)){}
 
 GPUFractalComponent::~GPUFractalComponent() {
     if (m_fbo) glDeleteFramebuffers(1, &m_fbo);

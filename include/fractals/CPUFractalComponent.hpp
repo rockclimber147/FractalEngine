@@ -11,7 +11,7 @@ protected:
     void UploadTexture();
 
 public:
-    CPUFractalComponent();
+    CPUFractalComponent(std::string name);
     virtual ~CPUFractalComponent() = default;
 
     // Implements the double-for-loop logic

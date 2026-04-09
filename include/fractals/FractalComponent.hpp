@@ -4,6 +4,8 @@
 
 class FractalComponent : public Component {
 protected:
+    std::string m_name;
+
     // Shared Viewport State
     double m_offsetX = 0.0;
     double m_offsetY = 0.0;
@@ -15,7 +17,7 @@ protected:
     GLuint m_textureID = 0;
 
 public:
-    FractalComponent();
+    FractalComponent(std::string m_name);
     virtual ~FractalComponent();
 
     // Shared logic (Implementation is identical for both)
@@ -29,4 +31,6 @@ public:
     // Common Interface
     ImTextureID GetResultTexture() const override;
     virtual double GetPixelsPerUnit() const { return 100.0 * m_zoom; }
+
+    std::string GetLabel() const override;
 };

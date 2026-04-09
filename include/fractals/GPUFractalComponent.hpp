@@ -17,7 +17,7 @@ protected:
     virtual void UploadExtraUniforms() {} // For things like max_iterations
 
 public:
-    GPUFractalComponent();
+    GPUFractalComponent(std::string name);
     virtual ~GPUFractalComponent();
 
     // Implements the Shader-dispatch logic

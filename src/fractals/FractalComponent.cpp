@@ -1,6 +1,9 @@
 #include "fractals/FractalComponent.hpp"
 
-FractalComponent::FractalComponent() {}
+FractalComponent::FractalComponent(std::string name) 
+    : m_name(std::move(name))
+{
+}
 
 FractalComponent::~FractalComponent() {
     if (m_textureID != 0) {
@@ -35,4 +38,8 @@ void FractalComponent::Zoom(float amount, float mouseX, float mouseY, float vW, 
 
 ImTextureID FractalComponent::GetResultTexture() const { 
     return (ImTextureID)(intptr_t)m_textureID; 
+}
+
+std::string FractalComponent::GetLabel() const {
+    return m_name;
 }

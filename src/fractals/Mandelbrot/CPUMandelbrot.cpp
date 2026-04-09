@@ -4,14 +4,12 @@
 #include <iostream>
 
 Mandelbrot::Mandelbrot(std::string name) 
-    : m_name(std::move(name)) 
+    : CPUFractalComponent(std::move(name)) 
 {
     // Start zoomed out to see the whole set
     m_zoom = 0.5; 
     UpdateTexture();
 }
-
-std::string Mandelbrot::GetLabel() const { return m_name; }
 
 void Mandelbrot::DrawControlPanel() {
     ImGui::Text("Mandelbrot");

@@ -31,6 +31,7 @@ set(SOURCES
     src/fractals/Julia/GPUJulia.cpp
     src/fractals/Lyapunov/GPULyapunov.cpp
     src/fractals/Newton/GPUNewton.cpp
+    src/utils/ShaderLoader.cpp
     
     # Dear ImGui Core
     ${IMGUI_DIR}/imgui.cpp

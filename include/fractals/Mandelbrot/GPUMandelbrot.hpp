@@ -19,7 +19,6 @@ public:
     virtual ~GPUMandelbrot() = default;
 
     // ImGui Interface
-    std::string GetLabel() const override;
     void DrawControlPanel() override;
     
     double GetPixelsPerUnit() const override { return 200.0 * m_zoom; }

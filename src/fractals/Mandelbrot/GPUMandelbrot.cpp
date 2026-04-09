@@ -1,14 +1,12 @@
 #include "fractals/Mandelbrot/GPUMandelbrot.hpp"
 
 GPUMandelbrot::GPUMandelbrot(std::string name) 
-    : m_name(std::move(name)) 
+    : GPUFractalComponent(std::move(name))
 {
     // Start zoomed out to see the whole set
     m_zoom = 0.5; 
     UpdateTexture();
 }
-
-std::string GPUMandelbrot::GetLabel() const { return m_name; }
 
 const char* GPUMandelbrot::GetFragmentShaderSource() {
     return R"(

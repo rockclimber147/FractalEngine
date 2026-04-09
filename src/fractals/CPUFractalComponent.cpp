@@ -1,6 +1,6 @@
 #include "fractals/CPUFractalComponent.hpp"
 
-CPUFractalComponent::CPUFractalComponent() : FractalComponent() {
+CPUFractalComponent::CPUFractalComponent(std::string name) : FractalComponent(std::move(name)) {
     InitTexture();
 }
 

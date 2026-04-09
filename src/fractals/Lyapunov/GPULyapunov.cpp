@@ -1,11 +1,9 @@
 #include "fractals/Lyapunov/GPULyapunov.hpp"
 
-GPULyapunov::GPULyapunov(std::string name) : m_name(std::move(name))
+GPULyapunov::GPULyapunov(std::string name) : GPUFractalComponent(std::move(name))
 {
     UpdateTexture();
 }
-
-std::string GPULyapunov::GetLabel() const { return m_name; }
 
 
 const char* GPULyapunov::GetFragmentShaderSource() {
