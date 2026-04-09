@@ -3,16 +3,17 @@
 #include "App.hpp"
 #include "imgui.h"
 #include "Component.hpp"
-#include "fractals/Mandelbrot/Mandelbrot.hpp"
 #include "fractals/Mandelbrot/GPUMandelbrot.hpp"
 #include "fractals/Julia/GPUJulia.hpp"
 #include "fractals/Lyapunov/GPULyapunov.hpp"
+#include "fractals/Newton/GPUNewton.hpp"
 
 App::App() {
     m_components["Mandelbrot"] = std::make_unique<GPUMandelbrot>("Mandelbrot");
     m_components["Julia"] = std::make_unique<GPUJulia>("Julia");
     m_components["Lyapunov"] = std::make_unique<GPULyapunov>("Lyapunov");
-    m_activeKey = "Julia";
+    m_components["Newton"] = std::make_unique<GPUNewton>("Newton");
+    m_activeKey = "Mandelbrot";
 }
 
 void App::Run() {
