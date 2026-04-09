@@ -6,6 +6,15 @@ GPUJulia::GPUJulia(std::string name)
     juliaCReal = -0.7f; 
     juliaCImag = 0.27f;
     m_zoom = 0.5; 
+    m_presets = {
+        {"Custom", 0.0f, 0.0f},
+        {"The Rabbit", -0.123f, 0.745f},
+        {"Dendrite", 0.0f, 0.641f},
+        {"San Marco", -0.75f, 0.0f},
+        {"The Dragon", 0.3602f, 0.10032f},
+        {"Siegel Disk", -0.391f, -0.587f},
+        {"Galactic", 0.285f, 0.01f}
+    };
     UpdateTexture();
 }
 
@@ -69,11 +78,34 @@ void GPUJulia::DrawControlPanel() {
     ImGui::Text("Julia Set");
     bool changed = false;
 
-    if (ImGui::SliderFloat("C Real Component", &juliaCReal, -1.0f, 1.0f)) {
-        changed = true;
+    ImGui::Text("Julia Set Presets");
+    if (ImGui::BeginCombo("Points of Interest", m_presets[m_selectedPreset].name.c_str())) {
+        for (int i = 0; i < m_presets.size(); i++) {
+            bool isSelected = (m_selectedPreset == i);
+            if (ImGui::Selectable(m_presets[i].name.c_str(), isSelected)) {
+                m_selectedPreset = i;
+                
+                // If it's not "Custom", apply the preset values
+                if (m_selectedPreset != 0) {
+                    juliaCReal = m_presets[m_selectedPreset].real;
+                    juliaCImag = m_presets[m_selectedPreset].imag;
+                    changed = true;
+                }
+            }
+            if (isSelected) ImGui::SetItemDefaultFocus();
+        }
+        ImGui::EndCombo();
     }
 
-    if (ImGui::SliderFloat("C Imaginary Component", &juliaCImag, -1.0f, 1.0f)) {
+    ImGui::Separator();
+
+    ImGui::Text("Constant (c)");
+    if (ImGui::DragFloat("Real", &juliaCReal, 0.001f, -2.0f, 2.0f)) {
+        m_selectedPreset = 0; // Switch to Custom if tweaked
+        changed = true;
+    }
+    if (ImGui::DragFloat("Imaginary", &juliaCImag, 0.001f, -2.0f, 2.0f)) {
+        m_selectedPreset = 0;
         changed = true;
     }
 

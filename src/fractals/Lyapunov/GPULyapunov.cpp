@@ -45,11 +45,9 @@ const char* GPULyapunov::GetFragmentShaderSource() {
             double lambda = sumLogDeriv / double(u_maxIterations);
 
             if (lambda < 0.0lf) {
-                // Stable: Color based on how negative lambda is
                 float val = float(abs(lambda));
                 FragColor = vec4(val * 0.5, val * 0.2, val, 1.0); // Deep blues/purples
             } else {
-                // Chaotic: Usually black or very dark
                 FragColor = vec4(0.0, 0.0, 0.0, 1.0);
             }
         }
