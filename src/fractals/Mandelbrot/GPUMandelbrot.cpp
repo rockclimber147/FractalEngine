@@ -61,10 +61,9 @@ void GPUMandelbrot::UploadExtraUniforms() {
 }
 
 void GPUMandelbrot::DrawControlPanel() {
-    ImGui::Text("Mandelbrot");
     bool changed = false;
 
-    if (ImGui::SliderInt("Detail (Iterations)", &m_maxIterations, 1, 2000)) {
+    if (ImGui::SliderInt("Max Iterations", &m_maxIterations, 1, 2000)) {
         changed = true;
     }
 

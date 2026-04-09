@@ -19,11 +19,21 @@ void App::Run() {
     // Control Window
     ImGui::Begin("Control Panel");
 
-    ImGui::Text("Select Active Slider:");
-    for (auto const& [name, component] : m_components) {
-        if (ImGui::Selectable(component->GetLabel().c_str(), m_activeKey == name)) {
-            m_activeKey = name;
+    ImGui::Text("Current Fractal:");
+    if (ImGui::BeginCombo("##FractalSelector", m_components[m_activeKey]->GetLabel().c_str())) {
+        
+        for (auto const& [name, component] : m_components) {
+            const bool isSelected = (m_activeKey == name);
+            if (ImGui::Selectable(component->GetLabel().c_str(), isSelected)) {
+                m_activeKey = name;
+            }
+            if (isSelected) {
+                ImGui::SetItemDefaultFocus();
+            }
         }
+
+        // 5. Always end a combo if BeginCombo returned true
+        ImGui::EndCombo();
     }
 
     ImGui::Separator();

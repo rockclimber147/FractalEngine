@@ -75,10 +75,9 @@ void GPUJulia::UploadExtraUniforms() {
 }
 
 void GPUJulia::DrawControlPanel() {
-    ImGui::Text("Julia Set");
     bool changed = false;
 
-    ImGui::Text("Julia Set Presets");
+    ImGui::Text("Presets");
     if (ImGui::BeginCombo("Points of Interest", m_presets[m_selectedPreset].name.c_str())) {
         for (int i = 0; i < m_presets.size(); i++) {
             bool isSelected = (m_selectedPreset == i);
@@ -111,7 +110,7 @@ void GPUJulia::DrawControlPanel() {
 
     ImGui::Separator();
 
-    if (ImGui::SliderInt("Detail (Iterations)", &m_maxIterations, 1, 2000)) {
+    if (ImGui::SliderInt("Max Iterations", &m_maxIterations, 1, 2000)) {
         changed = true;
     }
 
