@@ -13,7 +13,6 @@ struct JuliaPreset {
 
 class GPUJulia : public GPUFractalComponent {
 private:
-    std::string m_name;
     int m_selectedPreset = 0;
     std::vector<JuliaPreset> m_presets;
 

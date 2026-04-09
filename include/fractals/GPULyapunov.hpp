@@ -5,7 +5,6 @@
 
 class GPULyapunov : public GPUFractalComponent {
 private:
-    std::string m_name;
     int m_sequence[16] = {0, 0, 1, 0, 1}; // AABAB (0=A, 1=B)
     int m_seqLength = 5;
     int m_maxIterations = 200;

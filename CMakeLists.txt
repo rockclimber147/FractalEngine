@@ -30,6 +30,7 @@ set(SOURCES
     src/fractals/GPUJulia.cpp
     src/fractals/GPULyapunov.cpp
     src/fractals/GPUNewton.cpp
+    src/fractals/GPUApollonianGasket.cpp
     src/utils/ShaderLoader.cpp
     
     # Dear ImGui Core

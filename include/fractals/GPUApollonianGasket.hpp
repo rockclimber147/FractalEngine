@@ -3,20 +3,19 @@
 #include "fractals/core/GPUFractalComponent.hpp"
 #include <string>
 
-class GPUMandelbrot : public GPUFractalComponent {
-private:
-    int m_maxIterations = 500;
-    float m_colorFrequency = 1.0f;
-    float m_colorOffset = 0.0f;
-
+class GPUApollonianGasket : public GPUFractalComponent {
 protected:
+    float m_colorFrequency = 2.0f;
+    float m_colorOffset = 0.0f;
+    float m_foldScale = 1.0f;
+    float m_spread = 1.5f;
+
     void UploadExtraUniforms() override;
 
 public:
-    GPUMandelbrot(std::string name);
-    virtual ~GPUMandelbrot() = default;
+    GPUApollonianGasket(std::string name);
+    virtual ~GPUApollonianGasket() = default;
 
-    // ImGui Interface
     void DrawControlPanel() override;
     
     double GetPixelsPerUnit() const override { return 200.0 * m_zoom; }

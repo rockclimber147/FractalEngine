@@ -4,9 +4,6 @@
 #include <string>
 
 class GPUNewton : public GPUFractalComponent {
-private:
-    std::string m_name;
-
 protected:
     void UploadExtraUniforms() override;
 

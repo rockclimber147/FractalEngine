@@ -7,12 +7,14 @@
 #include "fractals/GPUJulia.hpp"
 #include "fractals/GPULyapunov.hpp"
 #include "fractals/GPUNewton.hpp"
+#include  "fractals/GPUApollonianGasket.hpp"
 
 App::App() {
     RegisterFractal<GPUMandelbrot>("Mandelbrot");
     RegisterFractal<GPUJulia>("Julia");
     RegisterFractal<GPULyapunov>("Lyapunov");
     RegisterFractal<GPUNewton>("Newton");
+    RegisterFractal<GPUApollonianGasket>("Apollonian Gasket");
     
     m_activeKey = "Mandelbrot";
 }
