@@ -12,8 +12,6 @@ protected:
     // GPU-specific setup
     void InitGLResources();
     
-    // The "Hook": Subclasses (like MandelbrotGPU) provide the GLSL code
-    virtual const char* GetFragmentShaderSource() = 0;
     virtual void UploadExtraUniforms() {} // For things like max_iterations
 
 public:
@@ -23,4 +21,7 @@ public:
     // Implements the Shader-dispatch logic
     void UpdateTexture() override;
     void Resize(int w, int h) override;
+
+private:
+    std::string LoadShaderFromFile();
 };

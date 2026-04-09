@@ -8,7 +8,6 @@ private:
     std::string m_name;
 
 protected:
-    const char* GetFragmentShaderSource() override;
     void UploadExtraUniforms() override;
 
 public:

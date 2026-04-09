@@ -11,7 +11,6 @@ private:
     float m_colorOffset = 0.0f;
 
 protected:
-    const char* GetFragmentShaderSource() override;
     void UploadExtraUniforms() override;
 
 public:

@@ -1,4 +1,6 @@
 #include "fractals/GPUFractalComponent.hpp"
+#include "utils/ShaderLoader.hpp"
+
 
 GPUFractalComponent::GPUFractalComponent(std::string name) 
     : FractalComponent(std::move(name)){}
@@ -28,7 +30,7 @@ void GPUFractalComponent::InitGLResources() {
     };
 
     GLuint vs = compile(GL_VERTEX_SHADER, vsSource);
-    GLuint fs = compile(GL_FRAGMENT_SHADER, GetFragmentShaderSource());
+    GLuint fs = compile(GL_FRAGMENT_SHADER, LoadShaderFromFile().c_str());
 
     m_shaderProgram = glCreateProgram();
     glAttachShader(m_shaderProgram, vs);
@@ -83,4 +85,8 @@ void GPUFractalComponent::Resize(int w, int h) {
     glBindTexture(GL_TEXTURE_2D, m_textureID);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_width, m_height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
     UpdateTexture();
+}
+
+std::string GPUFractalComponent::LoadShaderFromFile() {
+    return ShaderUtils::LoadShaderSource(GetLabel() + ".glsl");
 }

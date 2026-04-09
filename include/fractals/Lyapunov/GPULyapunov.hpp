@@ -11,7 +11,6 @@ private:
     int m_maxIterations = 200;
 
 protected:
-    const char* GetFragmentShaderSource() override;
     void UploadExtraUniforms() override;
 
 public:
