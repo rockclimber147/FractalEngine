@@ -33,4 +33,5 @@ public:
     virtual double GetPixelsPerUnit() const { return 100.0 * m_zoom; }
 
     std::string GetLabel() const override;
+    void DrawViewportInfo();
 };

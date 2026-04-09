@@ -81,10 +81,5 @@ void GPUJulia::DrawControlPanel() {
     if (changed) {
         UpdateTexture();
     }
-
-    ImGui::Separator();
-    ImGui::Text("Viewport Info:");
-    ImGui::Text("Pos: (%.3f, %.3f)", m_offsetX, m_offsetY);
-    ImGui::Text("Zoom: %.4f", m_zoom);
 }
 

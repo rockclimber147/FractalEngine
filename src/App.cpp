@@ -45,8 +45,12 @@ void App::Run() {
 
     ImGui::Separator();
     
-    if (m_components.count(m_activeKey)) {
-        m_components[m_activeKey]->DrawControlPanel();
+    auto it = m_components.find(m_activeKey);
+
+    if (it != m_components.end()) {
+        const auto& component = it->second;
+        component->DrawControlPanel();
+        component->DrawViewportInfo();
     }
     
     ImGui::End();
