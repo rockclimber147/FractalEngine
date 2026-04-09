@@ -3,10 +3,10 @@
 #include "App.hpp"
 #include "imgui.h"
 #include "Component.hpp"
-#include "fractals/Mandelbrot/GPUMandelbrot.hpp"
-#include "fractals/Julia/GPUJulia.hpp"
-#include "fractals/Lyapunov/GPULyapunov.hpp"
-#include "fractals/Newton/GPUNewton.hpp"
+#include "fractals/GPUMandelbrot.hpp"
+#include "fractals/GPUJulia.hpp"
+#include "fractals/GPULyapunov.hpp"
+#include "fractals/GPUNewton.hpp"
 
 App::App() {
     m_components["Mandelbrot"] = std::make_unique<GPUMandelbrot>("Mandelbrot");

@@ -1,4 +1,4 @@
-#include "fractals/GPUFractalComponent.hpp"
+#include "fractals/core/GPUFractalComponent.hpp"
 #include "utils/ShaderLoader.hpp"
 
 

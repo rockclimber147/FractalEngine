@@ -23,14 +23,13 @@ set(IMGUI_BACKEND_DIR "${IMGUI_DIR}/backends")
 set(SOURCES
     src/main.cpp
     src/App.cpp
-    src/fractals/FractalComponent.cpp
-    src/fractals/GPUFractalComponent.cpp
-    src/fractals/CPUFractalComponent.cpp
-    src/fractals/Mandelbrot/CPUMandelbrot.cpp
-    src/fractals/Mandelbrot/GPUMandelbrot.cpp
-    src/fractals/Julia/GPUJulia.cpp
-    src/fractals/Lyapunov/GPULyapunov.cpp
-    src/fractals/Newton/GPUNewton.cpp
+    src/fractals/core/FractalComponent.cpp
+    src/fractals/core/GPUFractalComponent.cpp
+    src/fractals/core/CPUFractalComponent.cpp
+    src/fractals/GPUMandelbrot.cpp
+    src/fractals/GPUJulia.cpp
+    src/fractals/GPULyapunov.cpp
+    src/fractals/GPUNewton.cpp
     src/utils/ShaderLoader.cpp
     
     # Dear ImGui Core

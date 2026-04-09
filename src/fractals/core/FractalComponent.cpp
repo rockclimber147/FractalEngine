@@ -1,4 +1,4 @@
-#include "fractals/FractalComponent.hpp"
+#include "fractals/core/FractalComponent.hpp"
 
 FractalComponent::FractalComponent(std::string name) 
     : m_name(std::move(name))

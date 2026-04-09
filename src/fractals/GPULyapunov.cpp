@@ -1,4 +1,4 @@
-#include "fractals/Lyapunov/GPULyapunov.hpp"
+#include "fractals/GPULyapunov.hpp"
 
 GPULyapunov::GPULyapunov(std::string name) : GPUFractalComponent(std::move(name))
 {

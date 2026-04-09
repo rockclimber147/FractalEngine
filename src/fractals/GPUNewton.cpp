@@ -1,4 +1,4 @@
-#include "fractals/Newton/GPUNewton.hpp"
+#include "fractals/GPUNewton.hpp"
 
 GPUNewton::GPUNewton(std::string name) 
     : GPUFractalComponent(std::move(name)) 

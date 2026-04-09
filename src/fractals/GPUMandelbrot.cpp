@@ -1,4 +1,4 @@
-#include "fractals/Mandelbrot/GPUMandelbrot.hpp"
+#include "fractals/GPUMandelbrot.hpp"
 
 GPUMandelbrot::GPUMandelbrot(std::string name) 
     : GPUFractalComponent(std::move(name))

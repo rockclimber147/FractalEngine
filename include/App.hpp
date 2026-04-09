@@ -3,7 +3,7 @@
 #include <string>
 #include <memory>
 #include <vector>
-#include "fractals/FractalComponent.hpp"
+#include "fractals/core/FractalComponent.hpp"
 
 class App {
 public:

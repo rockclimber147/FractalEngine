@@ -1,6 +1,6 @@
 #pragma once
 
-#include "fractals/GPUFractalComponent.hpp"
+#include "fractals/core/GPUFractalComponent.hpp"
 #include <string>
 
 class GPUMandelbrot : public GPUFractalComponent {

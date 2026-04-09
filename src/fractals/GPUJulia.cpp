@@ -1,4 +1,4 @@
-#include "fractals/Julia/GPUJulia.hpp"
+#include "fractals/GPUJulia.hpp"
 
 GPUJulia::GPUJulia(std::string name) 
     : GPUFractalComponent(std::move(name))
