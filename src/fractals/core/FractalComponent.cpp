@@ -55,4 +55,11 @@ void FractalComponent::DrawViewportInfo() {
     ImGui::Text("Viewport Info:");
     ImGui::Text("Pos: (%.3f, %.3f)", m_offsetX, m_offsetY);
     ImGui::Text("Zoom: %.4f", m_zoom);
+
+    if (ImGui::Button("Reset Viewport")) {
+        m_offsetX = 0.0;
+        m_offsetY = 0.0;
+        m_zoom = 0.5;
+        UpdateTexture(); 
+    }
 }
