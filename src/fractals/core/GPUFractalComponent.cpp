@@ -1,3 +1,4 @@
+#include <iostream>
 #include "fractals/core/GPUFractalComponent.hpp"
 #include "utils/ShaderLoader.hpp"
 
@@ -21,11 +22,22 @@ void GPUFractalComponent::InitGLResources() {
     )";
 
     // Compile logic
-    auto compile = [](GLenum type, const char* source) {
+    auto compile = [this](GLenum type, const char* source) {
         GLuint s = glCreateShader(type);
         glShaderSource(s, 1, &source, NULL);
         glCompileShader(s);
-        // Error checking omitted for brevity, but recommended!
+        GLint success;
+
+        glGetShaderiv(s, GL_COMPILE_STATUS, &success);
+        if (!success) {
+            char infoLog[1024];
+            glGetShaderInfoLog(s, 1024, NULL, infoLog);
+            std::cerr << "ERROR: Shader Compilation Failed (" 
+                    << (type == GL_VERTEX_SHADER ? "VERTEX" : "FRAGMENT") 
+                    << ") for Fractal: " << GetLabel() << "\n" 
+                    << infoLog << std::endl;
+                    
+        }
         return s;
     };
 
