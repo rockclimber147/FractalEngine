@@ -48,6 +48,15 @@ void GPUFractalComponent::InitGLResources() {
     glAttachShader(m_shaderProgram, fs);
     glLinkProgram(m_shaderProgram);
 
+    GLint linked;
+    glGetProgramiv(m_shaderProgram, GL_LINK_STATUS, &linked);
+    if (!linked) {
+        char infoLog[1024];
+        glGetProgramInfoLog(m_shaderProgram, 1024, NULL, infoLog);
+        std::cerr << "ERROR: Shader Linking Failed for Fractal: " << GetLabel() << "\n" 
+                << infoLog << std::endl;
+    }
+
     // Quad Setup
     float vertices[] = { -1,-1, -1,1, 1,1, 1,-1 };
     glGenVertexArrays(1, &m_vao);
@@ -88,6 +97,11 @@ void GPUFractalComponent::UpdateTexture() {
     glBindVertexArray(m_vao);
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    GLenum err;
+    while ((err = glGetError()) != GL_NO_ERROR) {
+        std::cerr << "OpenGL Error in UpdateTexture (" << m_name << "): " << err << std::endl;
+    }
 }
 
 void GPUFractalComponent::Resize(int w, int h) {
