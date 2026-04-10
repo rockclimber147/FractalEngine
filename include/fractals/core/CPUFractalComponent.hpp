@@ -19,5 +19,5 @@ public:
     void Resize(int w, int h) override;
 
     // The "Hook": Subclasses (like MandelbrotCPU) implement this
-    virtual void GetPixelColor(double u, double v, unsigned char rgb[3]) = 0;
+    virtual void GenerateFractalData() = 0;
 };

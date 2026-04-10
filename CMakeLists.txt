@@ -26,6 +26,7 @@ set(SOURCES
     src/fractals/core/FractalComponent.cpp
     src/fractals/core/GPUFractalComponent.cpp
     src/fractals/core/CPUFractalComponent.cpp
+    src/fractals/CPUBarnsleyFern.cpp
     src/fractals/GPUMandelbrot.cpp
     src/fractals/GPUJulia.cpp
     src/fractals/GPULyapunov.cpp

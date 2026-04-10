@@ -16,24 +16,12 @@ void CPUFractalComponent::Resize(int w, int h) {
 void CPUFractalComponent::UpdateTexture() {
     if (m_pixelBuffer.empty() || m_width <= 0 || m_height <= 0) return;
 
-    double ppu = GetPixelsPerUnit();
-    double halfW = m_width * 0.5;
-    double halfH = m_height * 0.5;
+    // Clear the buffer first (Paint it black)
+    std::fill(m_pixelBuffer.begin(), m_pixelBuffer.end(), 0);
 
-    for (int y = 0; y < m_height; y++) {
-        for (int x = 0; x < m_width; x++) {
-            double u = m_offsetX + (x - halfW) / ppu;
-            double v = m_offsetY + (y - halfH) / ppu;
+    // Call the specific rendering logic
+    GenerateFractalData(); 
 
-            unsigned char rgb[3];
-            GetPixelColor(u, v, rgb);
-
-            int idx = (y * m_width + x) * 3;
-            m_pixelBuffer[idx + 0] = rgb[0];
-            m_pixelBuffer[idx + 1] = rgb[1];
-            m_pixelBuffer[idx + 2] = rgb[2];
-        }
-    }
     UploadTexture();
 }
 

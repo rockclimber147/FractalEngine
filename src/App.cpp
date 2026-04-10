@@ -3,6 +3,7 @@
 #include "App.hpp"
 #include "imgui.h"
 #include "Component.hpp"
+#include "fractals/CPUBarnsleyFern.hpp"
 #include "fractals/GPUMandelbrot.hpp"
 #include "fractals/GPUJulia.hpp"
 #include "fractals/GPULyapunov.hpp"
@@ -17,6 +18,7 @@ App::App() {
     RegisterFractal<GPUNewton>("Newton");
     RegisterFractal<GPUApollonianGasket>("Apollonian Gasket");
     RegisterFractal<GPUCollatz>("Collatz");
+    RegisterFractal<CPUBarnsleyFern>("Barnsley Fern");
     
     m_activeKey = "Mandelbrot";
 }
