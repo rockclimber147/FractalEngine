@@ -18,7 +18,11 @@ dvec2 complexMul(dvec2 a, dvec2 b) {
 void main() {
     double ppu = 200.0lf * u_zoom;
 
-    dvec2 z = u_offset + (dvec2(gl_FragCoord.xy) - dvec2(u_resolution * 0.5f)) / ppu;
+    // --- VERTICAL FLIP APPLIED HERE ---
+    // Mapping gl_FragCoord.y from bottom-up to top-down
+    dvec2 flippedCoord = dvec2(gl_FragCoord.x, double(u_resolution.y) - gl_FragCoord.y);
+    
+    dvec2 z = u_offset + (flippedCoord - dvec2(u_resolution * 0.5f)) / ppu;
 
     int root = -1;
     int iter = 0;
@@ -33,6 +37,7 @@ void main() {
         z -= complexDiv(fz, dfz);
 
         double eps = 0.0001lf;
+        // The roots of z^3 - 1 = 0
         if (length(z - dvec2(1.0lf, 0.0lf)) < eps) { root = 0; break; }
         if (length(z - dvec2(-0.5lf, 0.86602540378lf)) < eps) { root = 1; break; }
         if (length(z - dvec2(-0.5lf, -0.86602540378lf)) < eps) { root = 2; break; }

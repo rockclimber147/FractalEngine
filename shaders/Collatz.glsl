@@ -26,7 +26,9 @@ dvec2 c_cos(dvec2 z) {
 
 void main() {
     double ppu = 200.0lf * u_zoom;
-    dvec2 z = u_offset + (dvec2(gl_FragCoord.xy) - dvec2(u_resolution * 0.5f)) / ppu;
+
+    dvec2 flippedCoord = dvec2(gl_FragCoord.x, double(u_resolution.y) - gl_FragCoord.y);
+    dvec2 z = u_offset + (flippedCoord - dvec2(u_resolution * 0.5f)) / ppu;
 
     int iter = 0;
     double pi = 3.141592653589793lf;
@@ -36,7 +38,6 @@ void main() {
         dvec2 pi_z = z * pi;
         dvec2 cos_pi_z = c_cos(pi_z);
         
-        // f(z) = distortion * ( (1+4z) - (shift + 2z) * cos(pi*z) )
         dvec2 term1 = 1.0lf + 4.0lf * z;
         dvec2 term2 = c_mul((shift + 2.0lf * z), cos_pi_z);
         

@@ -36,7 +36,6 @@ void GPUFractalComponent::InitGLResources() {
                     << (type == GL_VERTEX_SHADER ? "VERTEX" : "FRAGMENT") 
                     << ") for Fractal: " << GetLabel() << "\n" 
                     << infoLog << std::endl;
-                    
         }
         return s;
     };
@@ -50,7 +49,7 @@ void GPUFractalComponent::InitGLResources() {
     glLinkProgram(m_shaderProgram);
 
     // Quad Setup
-    float vertices[] = { -1,1, -1,-1, 1,-1, 1,1 };
+    float vertices[] = { -1,-1, -1,1, 1,1, 1,-1 };
     glGenVertexArrays(1, &m_vao);
     glGenBuffers(1, &m_vbo);
     glBindVertexArray(m_vao);

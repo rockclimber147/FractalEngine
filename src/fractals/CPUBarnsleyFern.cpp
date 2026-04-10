@@ -33,7 +33,7 @@ void CPUBarnsleyFern::GenerateFractalData() {
 
         // Convert world coordinates (x, y) to pixel coordinates (px, py)
         int px = (int)((x - m_offsetX) * ppu + m_width / 2);
-        int py = (int)((y - m_offsetY) * ppu + m_height / 2);
+        int py = (m_height - 1) - (int)((y - m_offsetY) * ppu + m_height / 2);
 
         // If the point is on screen, "paint" it green
         if (px >= 0 && px < m_width && py >= 0 && py < m_height) {

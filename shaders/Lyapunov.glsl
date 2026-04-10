@@ -14,7 +14,8 @@ uniform int u_seqLength;
 void main() {
     double ppu = 200.0lf * u_zoom;
     double a = u_offset.x + (double(gl_FragCoord.x) - double(u_resolution.x) * 0.5lf) / ppu;
-    double b = u_offset.y + (double(gl_FragCoord.y) - double(u_resolution.y) * 0.5lf) / ppu;
+    double flippedY = double(u_resolution.y) - double(gl_FragCoord.y);
+    double b = u_offset.y + (flippedY - double(u_resolution.y) * 0.5lf) / ppu;
 
     double x = 0.5lf;
     double sumLogDeriv = 0.0lf;

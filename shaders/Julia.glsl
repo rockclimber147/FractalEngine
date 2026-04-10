@@ -15,7 +15,8 @@ void main() {
     double ppu = 200.0lf * u_zoom;
     
     double u = u_offset.x + (double(gl_FragCoord.x) - double(u_resolution.x) * 0.5lf) / ppu;
-    double v = u_offset.y + (double(gl_FragCoord.y) - double(u_resolution.y) * 0.5lf) / ppu;
+    double flippedY = double(u_resolution.y) - double(gl_FragCoord.y);
+    double v = u_offset.y + (flippedY - double(u_resolution.y) * 0.5lf) / ppu;
 
     dvec2 z = dvec2(u, v);    // Pixel position is starting Z
     dvec2 c = u_juliaC;       // C is the fixed constant
